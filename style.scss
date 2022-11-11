@@ -1,0 +1,39 @@
+@mixin myRing($height, $color) {
+    $thin:$height / 15;
+    border: $thin solid $color;
+    height:$height;
+    width:$height;
+    border-radius:100%;
+    background-color:lighten(transparent,100);
+}
+.inLine {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+p {
+    margin:20px;
+    text-align:center;
+}
+
+.myRing1 {
+  @include myRing(30px, orange);
+}
+
+.myRing2 {
+    @include myRing(50px, yellow);
+    box-shadow: 5px 5px 5px grey, 5px 5px 5px grey inset;
+    
+}
+
+.myRings {
+    @extend .inLine;
+}
+
+@for $i from 1 through 6 {
+    .myRings div:nth-child(#{$i}) { 
+        @include myRing($i * 10px, black); 
+        transform:translateX(($i / 6) *(- 10px * $i));
+    }
+}
